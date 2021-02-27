@@ -38,6 +38,7 @@ public class PlayField extends JPanel implements ActionListener {
 		initializeBoard();
 	}
 	
+	//k
 	public void initializeBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
