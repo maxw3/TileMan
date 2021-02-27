@@ -27,6 +27,8 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private int x, y;
 	
+	Room room = new Room(25, 25, 25 * 7, 25 * 10);
+	
 	public Random random = new Random();
 	
 	private Image image;
@@ -69,10 +71,6 @@ public class PlayField extends JPanel implements ActionListener {
 	    }
 	}
 	
-	public void paint(Graphics g) {
-	    rand(g);
-	}
-	
 	public boolean forColor(Color forward) {
 		if(forward == Color.WHITE) {
 			return true;
@@ -83,6 +81,7 @@ public class PlayField extends JPanel implements ActionListener {
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        room.paint(g);
         g.drawImage(image,x,y,this);
     }
 

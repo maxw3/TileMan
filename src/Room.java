@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 
 public class Room {
 	public int x;
@@ -10,5 +11,9 @@ public class Room {
 		this.y = y;
 		this.w = w;
 		this.h = h;
+	}
+	
+	public void paint(Graphics g){
+		g.fillRect(x, y, w, h);
 	}
 }
