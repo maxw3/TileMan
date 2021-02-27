@@ -11,9 +11,8 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame implements ActionListener, EventListener{
 	
 	private JLabel title = new JLabel("this is a mess");
-	private ImageIcon image = new ImageIcon("logo.png");
 	
-	private JPanel drawPanel = new JPanel();
+	private Player player = new Player();
 	
 	MainFrame(){
 		//----------------------------------------------------------configure window
@@ -23,12 +22,12 @@ public class MainFrame extends JFrame implements ActionListener, EventListener{
 		this.setResizable(false);	//resizable?
 		
 		this.setSize(1400, 1050);
-		this.setLayout(new BorderLayout(2,2));
+		this.setLayout(null);
 		
 		this.setVisible(true);
 		
-		this.add(drawPanel);
-		drawPanel.setVisible(true);
+		this.add(player);
+		
 		
 	}
 
