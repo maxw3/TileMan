@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -90,19 +91,29 @@ public class PlayField extends JPanel implements ActionListener{
 	    }
 	}
 	
-	public void paint(Graphics g) {
-	    //rand(g);
-		g.setColor(Color.BLACK);
-		for(int i = 0; i < 10; i++) {
-			g.fillRect(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) * 25, random.nextInt(10) * 25);
-		}
+	public void paintRooms(Graphics g) {
 		
+		g.setColor(Color.BLACK);
+		
+		for(int i = 1; i < 10; i++) {
+		g.fillRect(random.ints(0, 990)
+      .findFirst()
+      .getAsInt(), random.ints(0, 990)
+      .findFirst()
+      .getAsInt(), random.ints(25, 300)
+      .findFirst()
+      .getAsInt(), random.ints(25, 300)
+      .findFirst()
+      .getAsInt());
+	}
 	}
 	
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
+        
+        paintRooms(g);
         
         Toolkit.getDefaultToolkit().sync();
     }
