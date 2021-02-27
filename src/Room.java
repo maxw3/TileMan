@@ -1,10 +1,15 @@
 import java.awt.Graphics;
 
 public class Room {
+	
 	public int x;
 	public int y;
 	public int w;
 	public int h;
+	
+	Room(){
+		
+	}
 	
 	Room(int x, int y, int w, int h){
 		this.x = x;
