@@ -67,16 +67,16 @@ public class PlayField extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.setBackground(new Color(69, 69, 180));
+		
 		this.setSize(1000, 1000);
-		repaint();
+		this.setBackground(new Color(69, 69, 180));
 		this.setVisible(true);
 
 	}
 	
 	public void rand(Graphics g) {
-		for(int i = 0; i < 1000; i += 50) {
-	        for(int j = 0; j < 1000; j += 50){
+		for(int i = 0; i < 1000; i += 25) {
+	        for(int j = 0; j < 1000; j += 25){
 	        	boolean randBool = random.nextBoolean();
 	        	Color col;
 	        	if(randBool) {
@@ -85,13 +85,18 @@ public class PlayField extends JPanel implements ActionListener{
 	        		col = Color.black;
 	        	}
 	            g.setColor(col);
-	            g.fillRect(j, i, 50, 50);
+	            g.fillRect(j, i, 25, 25);
 	        }
 	    }
 	}
 	
 	public void paint(Graphics g) {
-	    rand(g);
+	    //rand(g);
+		g.setColor(Color.BLACK);
+		for(int i = 0; i < 10; i++) {
+			g.fillRect(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) * 25, random.nextInt(10) * 25);
+		}
+		
 	}
 	
 	@Override

@@ -14,18 +14,7 @@ public class MainFrame extends JFrame implements ActionListener, EventListener{
 	
 	MainFrame(){
 		//----------------------------------------------------------configure window
-		this.setTitle("TileMan by TileMans Studios Inc.");
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		
-		this.setResizable(false);	//resizable?
-		
-		this.setSize(1000, 1000);
-		this.setLayout(null);
-		this.setVisible(true);
-		
-		this.add(playField);
-		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		initUI();
 		
 	}
 
@@ -33,5 +22,18 @@ public class MainFrame extends JFrame implements ActionListener, EventListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void initUI() {
+		this.setTitle("TileMan by TileMans Studios Inc.");
+		
+		this.setResizable(false);	//resizable?
+		
+		this.setSize(1000, 1028);
+		this.setVisible(true);
+		
+		this.add(playField);
+		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 }
