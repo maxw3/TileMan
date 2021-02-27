@@ -1,11 +1,14 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Paint;
+import java.awt.geom.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,28 +17,39 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+import javax.swing.*;
 
-public class PlayField extends JPanel implements ActionListener{
+public class PlayField extends JPanel implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	
-	private int maxDots;
-	private int dots;
+	private int x, y, velx, vely;
 	
-	private static Random random = new Random();
+	private Image image;
+	private Timer timer;
 	
-	private int dotSize = 50;
-
-	private final int x[] = new int[maxDots];
-    private final int y[] = new int[maxDots];
-
-	private boolean moveLeft = false;
-    private boolean moveRight = true;
-    private boolean moveUp = false;
-    private boolean moveDown = false;
-    private boolean activeGame = true;
+	public PlayField() {
+		initializeBoard();
+	}
 	
-	private BufferedImage image;
-
-	private void move() {
+	public void initializeBoard() {
+        addKeyListener(new TAdapter());
+        setFocusable(true);
+        images();
+        initializeGame();
+	}
+	
+	private void images() {
+		ImageIcon playerImage = new ImageIcon("C:/Users/ngang/OneDrive/Documents/GitHub/TileMan/player.png");
+		image = playerImage.getImage();
+	}
+	
+	private void initializeGame() {
+        timer = new Timer(100, this);
+        timer.start();
+    }
+	
+	/*private void move() {
 
         for (int i = dots; i > 0; i--) {
             x[i] = x[(i - 1)];
@@ -59,22 +73,7 @@ public class PlayField extends JPanel implements ActionListener{
         }
     }
 	
-	public PlayField() {
-		
-		try {
-			image = ImageIO.read(new File("player.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		this.setSize(1000, 1000);
-		this.setBackground(new Color(69, 69, 180));
-		this.setVisible(true);
-
-	}
-	
-	public void rand(Graphics g) {
+	/*public void rand(Graphics g) {
 		for(int i = 0; i < 1000; i += 25) {
 	        for(int j = 0; j < 1000; j += 25){
 	        	boolean randBool = random.nextBoolean();
@@ -91,32 +90,48 @@ public class PlayField extends JPanel implements ActionListener{
 	}
 	
 	public void paint(Graphics g) {
-	    //rand(g);
+	    rand(g);
 		g.setColor(Color.BLACK);
 		for(int i = 0; i < 10; i++) {
 			g.fillRect(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) * 25, random.nextInt(10) * 25);
 		}
 		
-	}
+	}*/
+
 	
 	@Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters
-        
-        Toolkit.getDefaultToolkit().sync();
+        g.drawImage(image,x,y,this);
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (activeGame) {
-
-            move();
-        }
-
-        repaint();	
+		repaint();
+		x+= velx;
+		y+=vely;
 	}
 
+	public void up() {
+		vely = -10;
+		velx = 0;
+	}
+	
+	public void down() {
+		vely = 10;
+		velx = 0;
+	}
+	
+	public void left() {
+		vely = 0;
+		velx = -10;
+	}
+	
+	public void right() {
+		vely = 0;
+		velx = 10;
+	}
+	
 	private class TAdapter extends KeyAdapter {
 
         @Override
@@ -124,29 +139,20 @@ public class PlayField extends JPanel implements ActionListener{
 
             int key = keyEvent.getKeyCode();
 
-            if ((key == KeyEvent.VK_LEFT) && (!moveRight)) {
-                moveLeft = true;
-                moveUp = false;
-                moveDown = false;
+            if (key == KeyEvent.VK_LEFT) {
+            	left();
             }
 
-            if ((key == KeyEvent.VK_RIGHT) && (!moveLeft)) {
-                moveRight = true;
-                moveUp = false;
-                moveDown = false;
-                
+            if (key == KeyEvent.VK_RIGHT) {
+                right();
             }
 
-            if ((key == KeyEvent.VK_UP) && (!moveDown)) {
-                moveUp = true;
-                moveRight = false;
-                moveLeft = false;
+            if (key == KeyEvent.VK_UP) {
+            	up();
             }
 
-            if ((key == KeyEvent.VK_DOWN) && (!moveUp)) {
-                moveDown = true;
-                moveRight = false;
-                moveLeft = false;
+            if (key == KeyEvent.VK_DOWN) {
+            	down();
             }
         }
     }
