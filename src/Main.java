@@ -3,6 +3,13 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+/**
+Avery: movements
+Max: generate levels
+Johnnie: enemies AI
+Walker: pixel arts
+**/
+
 public class Main {
 	
 	static MainFrame myMainFrame;

@@ -21,13 +21,12 @@ public class MainFrame extends JFrame implements ActionListener, EventListener{
 		
 		this.setResizable(false);	//resizable?
 		
-		this.setSize(1400, 1050);
+		this.setSize(1000, 1000);
 		this.setLayout(null);
 		
 		this.setVisible(true);
 		
 		this.add(player);
-		
 		
 	}
 
