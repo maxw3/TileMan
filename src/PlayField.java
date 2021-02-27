@@ -27,8 +27,8 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private int x, y;
 	
-	Room room = new Room(25, 25, 25 * 7, 25 * 10);
-	
+	Room rooms[] = new Room[6];
+
 	public Random random = new Random();
 	
 	private Image image;
@@ -52,6 +52,15 @@ public class PlayField extends JPanel implements ActionListener {
 	}
 	
 	private void initializeGame() {
+		
+		//temp code
+		rooms[0] = new Room(25,25,100,100);
+		rooms[1] = new Room(225,25,100,100);
+		rooms[2] = new Room(425,25,100,100);
+		rooms[3] = new Room(625,25,100,100);
+		rooms[4] = new Room(825,25,100,100);
+		rooms[5] = new Room(25,225,100,100);
+		
         timer = new Timer(100, this);
         timer.start();
     }
@@ -72,17 +81,15 @@ public class PlayField extends JPanel implements ActionListener {
 	    }
 	}
 	
-	public boolean forColor(Color forward) {
-		if(forward == Color.WHITE) {
-			return true;
-		}
-		return false;
-	}
-	
 	@Override
     public void paintComponent(Graphics g) {
+		
         super.paintComponent(g);
-        room.paint(g);
+        
+        for(Room r: rooms) {
+        	r.paint(g);
+        }
+        
         g.drawImage(image,x,y,this);
     }
 
@@ -131,4 +138,6 @@ public class PlayField extends JPanel implements ActionListener {
             }
         }
     }
+	
+	
 }
