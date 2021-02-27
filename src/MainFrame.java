@@ -10,23 +10,22 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements ActionListener, EventListener{
 	
-	private JLabel title = new JLabel("this is a mess");
-	
-	private Player player = new Player();
+	private PlayField playField = new PlayField();
 	
 	MainFrame(){
 		//----------------------------------------------------------configure window
-		this.setTitle("TileMan");
+		this.setTitle("TileMan by TileMans Studios Inc.");
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		this.setResizable(false);	//resizable?
 		
 		this.setSize(1000, 1000);
 		this.setLayout(null);
-		
 		this.setVisible(true);
 		
-		this.add(player);
+		this.add(playField);
+		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
 
