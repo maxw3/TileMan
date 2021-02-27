@@ -10,29 +10,27 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame implements ActionListener, EventListener{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	PlayField playField = new PlayField();
 	
 	MainFrame(){
-		//----------------------------------------------------------configure window
 		initUI();
 		
 	}
 
 	public void initUI() {
 		this.setTitle("TileMan by TileMans Studios Inc.");
-		
-		this.setResizable(false);	//resizable?
-		
+		this.setResizable(false);
 		this.setSize(1000, 1028);
-		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//------[FIRST]-------//
 		
+		//_____[ADD_STUFF]____//
 		this.add(playField);
 		
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//_______[LAST]_______//
+		this.setVisible(true);
 	}
 
 	@Override

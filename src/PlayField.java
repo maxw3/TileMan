@@ -25,6 +25,8 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private int x, y, velx, vely;
 	
+	public Random random = new Random();
+	
 	private Image image;
 	private Timer timer;
 	
@@ -40,7 +42,7 @@ public class PlayField extends JPanel implements ActionListener {
 	}
 	
 	private void images() {
-		ImageIcon playerImage = new ImageIcon("C:/Users/ngang/OneDrive/Documents/GitHub/TileMan/player.png");
+		ImageIcon playerImage = new ImageIcon("player.png");
 		image = playerImage.getImage();
 	}
 	
@@ -49,31 +51,7 @@ public class PlayField extends JPanel implements ActionListener {
         timer.start();
     }
 	
-	/*private void move() {
-
-        for (int i = dots; i > 0; i--) {
-            x[i] = x[(i - 1)];
-            y[i] = y[(i - 1)];
-        }
-
-        if (moveLeft) {
-            x[0] -= dotSize;
-        }
-
-        if (moveRight) {
-            x[0] += dotSize;
-        }
-
-        if (moveUp) {
-            y[0] -= dotSize;
-        }
-
-        if (moveDown) {
-            y[0] += dotSize;
-        }
-    }
-	
-	/*public void rand(Graphics g) {
+	public void rand(Graphics g) {
 		for(int i = 0; i < 1000; i += 25) {
 	        for(int j = 0; j < 1000; j += 25){
 	        	boolean randBool = random.nextBoolean();
@@ -96,7 +74,7 @@ public class PlayField extends JPanel implements ActionListener {
 			g.fillRect(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) * 25, random.nextInt(10) * 25);
 		}
 		
-	}*/
+	}
 
 	
 	@Override
