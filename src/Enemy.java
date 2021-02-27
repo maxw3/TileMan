@@ -1,27 +1,29 @@
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 public class Enemy{
-	
-	//enemy
-		private int enemyx=300,enemyy=300,dx,dy;
-	//enemyImage
-		private Image image2;
-	//random
+
+		public int enemyx=300,enemyy=300,dx,dy;
+		
+		Image image2;
+
 		Random randomGen = new Random();
 		int theRandomNumber = randomGen.nextInt(4);
+		
+		Enemy(){
+			images();
+		}
 		
 		private void images(){
 			//enemy
 			ImageIcon enemyImage = new ImageIcon("enemy.png");
 			image2 = enemyImage.getImage();
 		}
-		public void paintComponent(Graphics g) {
-			
-			g.fillRect(enemyx,enemyy,25,25);
+		public void paint(Graphics g) {
 			
 		}
 		

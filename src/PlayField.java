@@ -28,10 +28,13 @@ public class PlayField extends JPanel implements ActionListener {
 	private int x, y;
 	
 	Room rooms[] = new Room[6];
+	
+	Enemy enemy = new Enemy();
 
 	public Random random = new Random();
 	
 	private Image image;
+	private Image image2;
 	private Timer timer;
 	
 	public PlayField() {
@@ -90,11 +93,14 @@ public class PlayField extends JPanel implements ActionListener {
         	r.paint(g);
         }
         
+        g.drawImage(enemy.image2, enemy.enemyx, enemy.enemyy, this);
+        
         g.drawImage(image,x,y,this);
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		enemy.setRandomDirection();
 		repaint();
 	}
 
