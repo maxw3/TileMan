@@ -1,7 +1,9 @@
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Paint;
+import java.awt.Robot;
 import java.awt.geom.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -23,7 +25,7 @@ import javax.swing.*;
 public class PlayField extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
-	private int x, y, velx, vely;
+	private int x, y;
 	
 	public Random random = new Random();
 	
@@ -42,7 +44,7 @@ public class PlayField extends JPanel implements ActionListener {
 	}
 	
 	private void images() {
-		ImageIcon playerImage = new ImageIcon("player.png");
+		ImageIcon playerImage = new ImageIcon("player01.png");
 		image = playerImage.getImage();
 	}
 	
@@ -69,13 +71,14 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	public void paint(Graphics g) {
 	    rand(g);
-		g.setColor(Color.BLACK);
-		for(int i = 0; i < 10; i++) {
-			g.fillRect(random.nextInt(1000), random.nextInt(1000), random.nextInt(10) * 25, random.nextInt(10) * 25);
-		}
-		
 	}
-
+	
+	public boolean forColor(Color forward) {
+		if(forward == Color.WHITE) {
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
     public void paintComponent(Graphics g) {
@@ -86,28 +89,22 @@ public class PlayField extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		x+= velx;
-		y+=vely;
 	}
 
-	public void up() {
-		vely = -10;
-		velx = 0;
+	public void up(){
+		y -= 25;
 	}
 	
 	public void down() {
-		vely = 10;
-		velx = 0;
+		y += 25;
 	}
 	
 	public void left() {
-		vely = 0;
-		velx = -10;
+		x -= 25;
 	}
 	
 	public void right() {
-		vely = 0;
-		velx = 10;
+		x += 25;
 	}
 	
 	private class TAdapter extends KeyAdapter {
