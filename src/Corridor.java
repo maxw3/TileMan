@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -15,11 +16,10 @@ public class Corridor {
 	}
 	
 	public void paint(Graphics g) {
-		if(start.x < end.x) {
-			g.fillRect(start.x, start.y, start.x + end.x, start.y + end.y);
-		}else {
-			g.fillRect(0, 0, 0, 0);
-		}
+		g.setColor(Color.BLACK);
+		g.fillRect(start.x, start.y, end.x, 25);
+		
+		g.fillRect(end.x-25, start.y, 25, end.y);
 	}
 
 }

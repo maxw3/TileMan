@@ -28,6 +28,7 @@ public class PlayField extends JPanel implements ActionListener {
 	private int x, y;
 	
 	Room rooms[] = new Room[3];
+	Corridor cor = new Corridor();
 	
 	Enemy enemy = new Enemy();
 
@@ -62,7 +63,10 @@ public class PlayField extends JPanel implements ActionListener {
 		//temp code
 		rooms[0] = new Room(1,1,5,7);
 		rooms[1] = new Room(7,1,3,10);
-		rooms[2] = new Room(11,1,7,4);
+		rooms[2] = new Room(11,7,7,5);
+		
+		cor.start = rooms[0].center;
+		cor.end = rooms[2].center;
 		
         timer = new Timer(100, this);
         timer.start();
@@ -94,6 +98,8 @@ public class PlayField extends JPanel implements ActionListener {
         for(Room r: rooms) {
         	r.paint(g);
         }
+        
+        cor.paint(g);
         
         g.drawImage(enemy.image2, enemy.enemyx, enemy.enemyy, this);
         
