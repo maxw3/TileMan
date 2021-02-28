@@ -17,9 +17,9 @@ public class Corridor {
 	
 	public void paint(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(start.x, start.y, end.x, 25);
+		g.fillRect(start.x, start.y, end.x, 32);
 		
-		g.fillRect(end.x-25, start.y, 25, end.y);
+		g.fillRect(end.x-32, start.y, 32, end.y);
 	}
 
 }

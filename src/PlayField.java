@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -34,10 +35,18 @@ public class PlayField extends JPanel implements ActionListener {
 
 	public Random random = new Random();
 	
-	private Image image;
-	private Image image2;
 	private Timer timer;
 	
+	private Image imagePlayerDown;
+    private Image imagePlayerRight;
+    private Image imagePlayerLeft;
+    private Image imagePlayerUp;
+    private Image currentImage; 
+    
+//    private Image spriteSheet;
+//    
+//    public ArrayList<BufferedImage> spriteListChar = new ArrayList<BufferedImage>();
+//	
 	public PlayField() {
 		initializeBoard();
 	}
@@ -51,12 +60,64 @@ public class PlayField extends JPanel implements ActionListener {
         
         images();
         initializeGame();
+        
+//        final int mapX = 125;
+//        final int mapY = 300;
+//        int rows = 12;
+//        int cols = 5;
+//
+//        BufferedImage[][] sprites = new BufferedImage[cols][rows];
+//
+//        for (int i = 0; i < rows; i++)
+//        {
+//            for (int j = 0; j < cols; j++)
+//            {
+//                sprites[j][i] = ((BufferedImage) spriteSheet).getSubimage(j * 25, i * 25, 25, 25);
+//            }
+//        }
+//        
+//        for (int i = 0; i < mapX; i++)
+//        {
+//            for (int j = 0; j < mapY; j++)
+//            {
+//                //spriteListRiver
+//                BufferedImage charS = sprites[0][0];
+//                spriteListChar.add(charS);
+//                BufferedImage charN = sprites[1][0];
+//                spriteListChar.add(charN);
+//                BufferedImage charW = sprites[4][0];
+//                spriteListChar.add(charW);
+//                BufferedImage charE = sprites[5][0];
+//                spriteListChar.add(charE);
+//                BufferedImage riverLD = sprites[4][1];
+//                spriteListChar.add(riverLD);
+//                BufferedImage riverRD = sprites[5][1];
+//                spriteListChar.add(riverRD);
+//                BufferedImage riverRoadV = sprites[6][1];
+//                spriteListChar.add(riverRoadV);
+//                BufferedImage riverRoadH = sprites[7][1];
+//                spriteListChar.add(riverRoadH);
+//            }
+//        }
 	}
 	
 	private void images() {
-		ImageIcon playerImage = new ImageIcon("player01.png");
-		image = playerImage.getImage();
-	}
+        ImageIcon player1DownImage = new ImageIcon("player1down.png");
+        imagePlayerDown = player1DownImage.getImage();
+        currentImage = imagePlayerDown;
+
+        ImageIcon player1RightImage = new ImageIcon("player1right.png");
+        imagePlayerRight = player1RightImage.getImage();
+
+        ImageIcon Player1UpImage = new ImageIcon("player1up.png");
+        imagePlayerUp = Player1UpImage.getImage();
+
+        ImageIcon Player1LeftImage = new ImageIcon("player1left.png");
+        imagePlayerLeft = Player1LeftImage.getImage();
+        
+//        ImageIcon spritesIcon = new ImageIcon("charSpriteSheet.png");
+//        spriteSheet = spritesIcon.getImage();
+    }
 	
 	private void initializeGame() {
 		
@@ -103,7 +164,7 @@ public class PlayField extends JPanel implements ActionListener {
         
         g.drawImage(enemy.image2, enemy.enemyx, enemy.enemyy, this);
         
-        g.drawImage(image,x,y,this);
+        g.drawImage(currentImage,x,y,this); 
     }
 
 	@Override
@@ -113,19 +174,19 @@ public class PlayField extends JPanel implements ActionListener {
 	}
 
 	public void up(){
-		y -= 25;
+		y -= 32;
 	}
 	
 	public void down() {
-		y += 25;
+		y += 32;
 	}
 	
 	public void left() {
-		x -= 25;
+		x -= 32;
 	}
 	
 	public void right() {
-		x += 25;
+		x += 32;
 	}
 	
 	private class TAdapter extends KeyAdapter {
@@ -136,19 +197,23 @@ public class PlayField extends JPanel implements ActionListener {
             int key = keyEvent.getKeyCode();
 
             if (key == KeyEvent.VK_LEFT) {
-            	left();
+                left();
+                currentImage = imagePlayerLeft; //change I made 
             }
 
             if (key == KeyEvent.VK_RIGHT) {
                 right();
+                currentImage = imagePlayerRight;//change I made 
             }
 
             if (key == KeyEvent.VK_UP) {
-            	up();
+                up();
+                currentImage = imagePlayerUp;//change I made 
             }
 
             if (key == KeyEvent.VK_DOWN) {
-            	down();
+                down();
+                currentImage = imagePlayerDown;//change I made 
             }
         }
     }

@@ -45,25 +45,25 @@ public class Enemy{
 		
 		//enemy move
 		public void moveUp() {
-			dy=-25;
+			dy=-32;
 			enemyy+=dy;
 			dx=0;
 			
 		}
 		public void moveDown() {
-			dy=25;
+			dy=32;
 			enemyy+=dy;
 			dx=0;
 			
 		}
 		public void moveRight() {
 			dy=0;
-			dx=25;
+			dx=32;
 			enemyx+=dx;
 		}
 		public void moveLeft() {
 			dy=0;
-			dx=-25;
+			dx=-32;
 			enemyx+=dx;
 		}
 }

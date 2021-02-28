@@ -15,12 +15,12 @@ public class Room {
 	}
 	
 	Room(int x, int y, int w, int h){
-		this.x = x * 25;
-		this.y = y * 25;
-		this.w = w * 25;
-		this.h = h * 25;
+		this.x = x * 32;
+		this.y = y * 32;
+		this.w = w * 32;
+		this.h = h * 32;
 		
-		center = new Point(this.x + Math.round( this.w % 3 * 25), this.y + Math.round( this.h % 4 * 25));
+		center = new Point(this.x + Math.round( this.w % 3 * 32), this.y + Math.round( this.h % 4 * 32));
 		
 	}
 	
