@@ -27,7 +27,7 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private int x, y;
 	
-	Room rooms[] = new Room[6];
+	Room rooms[] = new Room[3];
 	
 	Enemy enemy = new Enemy();
 
@@ -45,6 +45,9 @@ public class PlayField extends JPanel implements ActionListener {
 	public void initializeBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
+        
+        this.setBackground(new Color(69,69,180));
+        
         images();
         initializeGame();
 	}
@@ -57,12 +60,9 @@ public class PlayField extends JPanel implements ActionListener {
 	private void initializeGame() {
 		
 		//temp code
-		rooms[0] = new Room(25,25,100,100);
-		rooms[1] = new Room(225,25,100,100);
-		rooms[2] = new Room(425,25,100,100);
-		rooms[3] = new Room(625,25,100,100);
-		rooms[4] = new Room(825,25,100,100);
-		rooms[5] = new Room(25,225,100,100);
+		rooms[0] = new Room(1,1,5,7);
+		rooms[1] = new Room(7,1,3,10);
+		rooms[2] = new Room(11,1,7,4);
 		
         timer = new Timer(100, this);
         timer.start();
@@ -86,6 +86,8 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	@Override
     public void paintComponent(Graphics g) {
+		
+		g.setColor(Color.WHITE);
 		
         super.paintComponent(g);
         

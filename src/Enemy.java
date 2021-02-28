@@ -19,7 +19,6 @@ public class Enemy{
 		}
 		
 		private void images(){
-			//enemy
 			ImageIcon enemyImage = new ImageIcon("enemy.png");
 			image2 = enemyImage.getImage();
 		}
@@ -46,25 +45,25 @@ public class Enemy{
 		
 		//enemy move
 		public void moveUp() {
-			dy=-5;
+			dy=-25;
 			enemyy+=dy;
 			dx=0;
 			
 		}
 		public void moveDown() {
-			dy=5;
+			dy=25;
 			enemyy+=dy;
 			dx=0;
 			
 		}
 		public void moveRight() {
 			dy=0;
-			dx=5;
+			dx=25;
 			enemyx+=dx;
 		}
 		public void moveLeft() {
 			dy=0;
-			dx=-5;
+			dx=-25;
 			enemyx+=dx;
 		}
 }
