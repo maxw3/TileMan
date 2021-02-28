@@ -14,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,9 +29,6 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private int x, y;
 	
-	Room rooms[] = new Room[3];
-	Corridor cor = new Corridor();
-	
 	Enemy enemy = new Enemy();
 
 	public Random random = new Random();
@@ -43,6 +41,7 @@ public class PlayField extends JPanel implements ActionListener {
     private Image imagePlayerUp;
     private Image currentImage; 
     
+    public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	public PlayField() {
 		initializeBoard();
@@ -56,6 +55,15 @@ public class PlayField extends JPanel implements ActionListener {
         this.setBackground(new Color(69,69,180));
         
         images();
+        
+        for(int i = 0; i < 1000; i++) {
+        	for(int j = 0; j < 1000; j++) {
+        		tiles.add(new Tile(i,j));
+        		j += 32;
+        	}
+        	i += 32;
+        }
+        
         initializeGame();
 	}
 	
@@ -79,55 +87,42 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	private void initializeGame() {
 		
-		//temp code
-		rooms[0] = new Room(1,1,5,7);
-		rooms[1] = new Room(7,1,3,10);
-		rooms[2] = new Room(11,7,7,5);
-		
-		cor.start = rooms[0].center;
-		cor.end = rooms[2].center;
-		
         timer = new Timer(100, this);
         timer.start();
     }
 	
-	public void rand(Graphics g) {
-		for(int i = 0; i < 1000; i += 25) {
-	        for(int j = 0; j < 1000; j += 25){
-	        	boolean randBool = random.nextBoolean();
-	        	Color col;
-	        	if(randBool) {
-	        		col = Color.white;
-	        	}else {
-	        		col = Color.black;
-	        	}
-	            g.setColor(col);
-	            g.fillRect(j, i, 25, 25);
-	        }
-	    }
-	}
+//	public void rand(Graphics g) {
+//		for(int i = 0; i < 1000; i += 25) {
+//	        for(int j = 0; j < 1000; j += 25){
+//	        	boolean randBool = random.nextBoolean();
+//	        	Color col;
+//	        	if(randBool) {
+//	        		col = Color.white;
+//	        	}else {
+//	        		col = Color.black;
+//	        	}
+//	            g.setColor(col);
+//	            g.fillRect(j, i, 25, 25);
+//	        }
+//	    }
+//	}
 	
 	@Override
     public void paintComponent(Graphics g) {
 		
-		g.setColor(Color.WHITE);
+		for(Tile t: tiles) {
+			t.place(g);
+		}
 		
-        super.paintComponent(g);
+		g.setColor(Color.WHITE);
         
-        for(Room r: rooms) {
-        	r.paint(g);
-        }
-        
-        cor.paint(g);
-        
-        g.drawImage(enemy.image2, enemy.enemyx, enemy.enemyy, this);
+        g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
         
         g.drawImage(currentImage,x,y,this); 
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		enemy.setRandomDirection();
 		repaint();
 	}
 
