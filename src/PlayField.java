@@ -43,10 +43,7 @@ public class PlayField extends JPanel implements ActionListener {
     private Image imagePlayerUp;
     private Image currentImage; 
     
-//    private Image spriteSheet;
-//    
-//    public ArrayList<BufferedImage> spriteListChar = new ArrayList<BufferedImage>();
-//	
+
 	public PlayField() {
 		initializeBoard();
 	}
@@ -60,45 +57,6 @@ public class PlayField extends JPanel implements ActionListener {
         
         images();
         initializeGame();
-        
-//        final int mapX = 125;
-//        final int mapY = 300;
-//        int rows = 12;
-//        int cols = 5;
-//
-//        BufferedImage[][] sprites = new BufferedImage[cols][rows];
-//
-//        for (int i = 0; i < rows; i++)
-//        {
-//            for (int j = 0; j < cols; j++)
-//            {
-//                sprites[j][i] = ((BufferedImage) spriteSheet).getSubimage(j * 25, i * 25, 25, 25);
-//            }
-//        }
-//        
-//        for (int i = 0; i < mapX; i++)
-//        {
-//            for (int j = 0; j < mapY; j++)
-//            {
-//                //spriteListRiver
-//                BufferedImage charS = sprites[0][0];
-//                spriteListChar.add(charS);
-//                BufferedImage charN = sprites[1][0];
-//                spriteListChar.add(charN);
-//                BufferedImage charW = sprites[4][0];
-//                spriteListChar.add(charW);
-//                BufferedImage charE = sprites[5][0];
-//                spriteListChar.add(charE);
-//                BufferedImage riverLD = sprites[4][1];
-//                spriteListChar.add(riverLD);
-//                BufferedImage riverRD = sprites[5][1];
-//                spriteListChar.add(riverRD);
-//                BufferedImage riverRoadV = sprites[6][1];
-//                spriteListChar.add(riverRoadV);
-//                BufferedImage riverRoadH = sprites[7][1];
-//                spriteListChar.add(riverRoadH);
-//            }
-//        }
 	}
 	
 	private void images() {
