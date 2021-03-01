@@ -80,36 +80,15 @@ public class PlayField extends JPanel implements ActionListener {
 
         ImageIcon Player1LeftImage = new ImageIcon("player1left.png");
         imagePlayerLeft = Player1LeftImage.getImage();
-        
-//        ImageIcon spritesIcon = new ImageIcon("charSpriteSheet.png");
-//        spriteSheet = spritesIcon.getImage();
     }
 	
 	private void initializeGame() {
-		
         timer = new Timer(100, this);
         timer.start();
     }
 	
-//	public void rand(Graphics g) {
-//		for(int i = 0; i < 1000; i += 25) {
-//	        for(int j = 0; j < 1000; j += 25){
-//	        	boolean randBool = random.nextBoolean();
-//	        	Color col;
-//	        	if(randBool) {
-//	        		col = Color.white;
-//	        	}else {
-//	        		col = Color.black;
-//	        	}
-//	            g.setColor(col);
-//	            g.fillRect(j, i, 25, 25);
-//	        }
-//	    }
-//	}
-	
 	@Override
     public void paintComponent(Graphics g) {
-		
 		for(Tile t: tiles) {
 			t.place(g);
 		}
