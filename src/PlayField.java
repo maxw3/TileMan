@@ -44,30 +44,22 @@ public class PlayField extends JPanel implements ActionListener {
     public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	public PlayField() {
-		initializeBoard();
+		initBoard();
 	}
 	
 	//k
-	public void initializeBoard() {
+	public void initBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
         
         this.setBackground(new Color(69,69,180));
         
-        images();
-        
-        for(int i = 0; i < 1000; i++) {
-        	for(int j = 0; j < 1000; j++) {
-        		tiles.add(new Tile(i,j));
-        		j += 32;
-        	}
-        	i += 32;
-        }
-        
-        initializeGame();
+        initImages();
+
+        initGame();
 	}
 	
-	private void images() {
+	private void initImages() {
         ImageIcon player1DownImage = new ImageIcon("player1down.png");
         imagePlayerDown = player1DownImage.getImage();
         currentImage = imagePlayerDown;
@@ -82,16 +74,14 @@ public class PlayField extends JPanel implements ActionListener {
         imagePlayerLeft = Player1LeftImage.getImage();
     }
 	
-	private void initializeGame() {
+	private void initGame() {
         timer = new Timer(100, this);
         timer.start();
     }
 	
 	@Override
     public void paintComponent(Graphics g) {
-		for(Tile t: tiles) {
-			t.place(g);
-		}
+		MapGen.paintMap(g);
 		
 		g.setColor(Color.WHITE);
         
