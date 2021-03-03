@@ -6,9 +6,8 @@ import javax.swing.ImageIcon;
 
 public class Player {
 	
-	private int x = 32, y = 32;
-	
 	private final int SCALE = Main.SCALE;
+	private int x = 15 * SCALE, y = 6 * SCALE;
 	
 	public int getX() {
 		return x;
@@ -62,10 +61,8 @@ public class Player {
 	}
 	
 	public void left() {
-		//System.out.println(x);
 		setCurrImage(imagePlayerLeft);
 		x -= 32;
-		//System.out.println(x);
 	}
 	
 	public void right() {

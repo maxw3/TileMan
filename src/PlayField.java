@@ -62,33 +62,94 @@ public class PlayField extends JPanel implements ActionListener {
 		
 		g.setColor(Color.WHITE);
         
-        //g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
+        g.drawImage(enemy.getCurrImage(), enemy.enemyX, enemy.enemyY, this);
         
         g.drawImage(player.getCurrImage(),player.getX(),player.getY(),this); 
     }
-	
-	public boolean checkLeft(){
-//		Point pPoint = new Point(player.getX() + SCALE,player.getY());
-//		Point tPoint = pPoint;
-//		tPoint.move(tPoint.x - SCALE, tPoint.y); 
-//		
-//		for(Tile t: MapGen.tiles) {
-//			if(t.getY() == tPoint.y && t.getX() == tPoint.x) {
-//			}
-//		}
-		
-		return true;
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 	}
 	
+	public boolean checkLeft() {
+		
+		int goToX = player.getX() - SCALE;
+		int goToY = player.getY();
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean checkRight() {
+		
+		int goToX = player.getX() + SCALE;
+		int goToY = player.getY();
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean checkUp() {
+		
+		int goToX = player.getX();
+		int goToY = player.getY() - SCALE;
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean checkDown() {
+		
+		int goToX = player.getX();
+		int goToY = player.getY() + SCALE;
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	private class TAdapter extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
+        	
+        	System.out.print("From:(" + player.getX() + "," + player.getY() + ")");
 
             int key = keyEvent.getKeyCode();
 
@@ -96,17 +157,21 @@ public class PlayField extends JPanel implements ActionListener {
             	player.left();
             }
 
-            if (key == KeyEvent.VK_RIGHT) {
+            if (key == KeyEvent.VK_RIGHT && checkRight()) {
             	player.right();
             }
 
-            if (key == KeyEvent.VK_UP) {
+            if (key == KeyEvent.VK_UP && checkUp()) {
             	player.up();
             }
 
-            if (key == KeyEvent.VK_DOWN) {
+            if (key == KeyEvent.VK_DOWN && checkDown()) {
             	player.down();
             }
+            
+            System.out.print(" To:(" + player.getX() + "," + player.getY() + ")");
+            System.out.println();
+            
         }
     }
 	

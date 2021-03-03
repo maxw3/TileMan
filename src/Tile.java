@@ -9,18 +9,18 @@ public class Tile {
 	private final int SCALE = Main.SCALE;
 	
 	Tile(int x, int y, boolean isFloor){
-		this.x = x;
-		this.y = y;
+		this.x = x * SCALE;
+		this.y = y * SCALE;
 		this.isWall = isFloor;
 	}
 	
 	void place(Graphics g){
 		if(isWall) {
 			g.setColor(Color.BLACK);
-			g.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+			g.fillRect(x, y, SCALE, SCALE);
 		}else {
 			g.setColor(Color.WHITE);
-			g.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+			g.fillRect(x, y, SCALE, SCALE);
 		}
 	}
 	

@@ -10,7 +10,8 @@ import javax.swing.Timer;
 
 public class Enemy implements ActionListener{
 
-		public int enemyx=300,enemyy=300,dx,dy;
+		public int enemyX=32,enemyY=32,dx,dy;
+		private final int SCALE = Main.SCALE;
 		
 		Timer wait = new Timer(1000, this);
 		
@@ -26,6 +27,13 @@ public class Enemy implements ActionListener{
 		Enemy(){
 			initImages();
 			wait.start();
+		}
+		
+		public int getX() {
+			return enemyX;
+		}
+		public int getY() {
+			return enemyY;
 		}
 		
 		private void initImages(){
@@ -56,42 +64,122 @@ public class Enemy implements ActionListener{
 			wait.start();
 		     switch(randomGen.nextInt(4)) {
 		     case 0:
-		         moveUp();
-		         break;
+		    	 if(checkUp()) {
+		    		 moveUp();
+		    		 break;
+		    	 }
 		     case 1:
-		         moveLeft();
-		         break;
+		    	 if(checkLeft()) {
+		    		 moveLeft();
+		    		 break;
+		    	 }
 		     case 2:
-		         moveRight();
-		         break;
+		    	 if(checkRight()) {
+		    		moveRight();
+		         	break;
+		    	 }
 		     case 3:
-		         moveDown();
-		         break;
+		    	 if(checkDown()) {
+		    		moveDown();
+		         	break;
+		    	 }
 		     }
 		}
 		
 		//enemy move
 		public void moveUp() {
-			enemyy -= 32;
+			enemyY -= 32;
 			currentImage = imageEnemyUp;
 			
 		}
 		public void moveDown() {
-			enemyy += 32;
+			enemyY += 32;
 			currentImage = imageEnemyDown;
 			
 		}
 		public void moveRight() {
-			enemyx += 32;
+			enemyX += 32;
 			currentImage = imageEnemyRight;
 		}
 		public void moveLeft() {
-			enemyx -= 32;
+			enemyX -= 32;
 			currentImage = imageEnemyLeft;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			setRandomDirection();
+		}
+		
+		public boolean checkLeft() {
+			
+			int goToX = this.getX() - SCALE;
+			int goToY = this.getY();
+			
+			for(Tile t: MapGen.tiles) {
+				if(t.getX() == goToX) {
+					if(t.getY() == goToY) {
+						if(t.isWall) {
+							return false;
+						}
+					}
+				}
+			}
+			
+			return true;
+		}
+		
+		public boolean checkRight() {
+			
+			int goToX = this.getX() + SCALE;
+			int goToY = this.getY();
+			
+			for(Tile t: MapGen.tiles) {
+				if(t.getX() == goToX) {
+					if(t.getY() == goToY) {
+						if(t.isWall) {
+							return false;
+						}
+					}
+				}
+			}
+			
+			return true;
+		}
+		
+		public boolean checkUp() {
+			
+			int goToX = this.getX();
+			int goToY = this.getY() - SCALE;
+			
+			for(Tile t: MapGen.tiles) {
+				if(t.getX() == goToX) {
+					if(t.getY() == goToY) {
+						if(t.isWall) {
+							return false;
+						}
+					}
+				}
+			}
+			
+			return true;
+		}
+		
+		public boolean checkDown() {
+			
+			int goToX = this.getX();
+			int goToY = this.getY() + SCALE;
+			
+			for(Tile t: MapGen.tiles) {
+				if(t.getX() == goToX) {
+					if(t.getY() == goToY) {
+						if(t.isWall) {
+							return false;
+						}
+					}
+				}
+			}
+			
+			return true;
 		}
 }
