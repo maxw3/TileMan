@@ -24,11 +24,11 @@ public class Enemy implements ActionListener{
 		int theRandomNumber = randomGen.nextInt(4);
 		
 		Enemy(){
-			images();
+			initImages();
 			wait.start();
 		}
 		
-		private void images(){
+		private void initImages(){
 			ImageIcon enemyDownImage = new ImageIcon("enemyDown.png");
 	        imageEnemyDown = enemyDownImage.getImage();
 	        currentImage = imageEnemyDown;

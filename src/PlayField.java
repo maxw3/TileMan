@@ -27,21 +27,12 @@ import javax.swing.*;
 public class PlayField extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
-	private int x, y;
-	
 	Enemy enemy = new Enemy();
+	Player player = new Player();
 
 	public Random random = new Random();
 	
 	private Timer timer;
-	
-	private Image imagePlayerDown;
-    private Image imagePlayerRight;
-    private Image imagePlayerLeft;
-    private Image imagePlayerUp;
-    private Image currentImage; 
-    
-    public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	public PlayField() {
 		initBoard();
@@ -53,26 +44,9 @@ public class PlayField extends JPanel implements ActionListener {
         setFocusable(true);
         
         this.setBackground(new Color(69,69,180));
-        
-        initImages();
 
         initGame();
 	}
-	
-	private void initImages() {
-        ImageIcon player1DownImage = new ImageIcon("player1down.png");
-        imagePlayerDown = player1DownImage.getImage();
-        currentImage = imagePlayerDown;
-
-        ImageIcon player1RightImage = new ImageIcon("player1right.png");
-        imagePlayerRight = player1RightImage.getImage();
-
-        ImageIcon Player1UpImage = new ImageIcon("player1up.png");
-        imagePlayerUp = Player1UpImage.getImage();
-
-        ImageIcon Player1LeftImage = new ImageIcon("player1left.png");
-        imagePlayerLeft = Player1LeftImage.getImage();
-    }
 	
 	private void initGame() {
         timer = new Timer(100, this);
@@ -87,28 +61,12 @@ public class PlayField extends JPanel implements ActionListener {
         
         g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
         
-        g.drawImage(currentImage,x,y,this); 
+        g.drawImage(player.getCurrImage(),player.x,player.y,this); 
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-	}
-
-	public void up(){
-		y -= 32;
-	}
-	
-	public void down() {
-		y += 32;
-	}
-	
-	public void left() {
-		x -= 32;
-	}
-	
-	public void right() {
-		x += 32;
 	}
 	
 	private class TAdapter extends KeyAdapter {
@@ -119,23 +77,19 @@ public class PlayField extends JPanel implements ActionListener {
             int key = keyEvent.getKeyCode();
 
             if (key == KeyEvent.VK_LEFT) {
-                left();
-                currentImage = imagePlayerLeft; //change I made 
+                player.left();
             }
 
             if (key == KeyEvent.VK_RIGHT) {
-                right();
-                currentImage = imagePlayerRight;//change I made 
+                player.right();
             }
 
             if (key == KeyEvent.VK_UP) {
-                up();
-                currentImage = imagePlayerUp;//change I made 
+                player.up();
             }
 
             if (key == KeyEvent.VK_DOWN) {
-                down();
-                currentImage = imagePlayerDown;//change I made 
+                player.down();
             }
         }
     }

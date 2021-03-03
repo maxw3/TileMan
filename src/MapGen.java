@@ -14,6 +14,7 @@ public class MapGen {
 	private static Scanner mapScan;
 	
 	private static ArrayList<String> mapLines = new ArrayList<String>();
+	public static ArrayList<Tile> tiles = new ArrayList<Tile>();
 	
 	public static void init() throws FileNotFoundException {
 		scanMap();
@@ -21,15 +22,20 @@ public class MapGen {
 	}
 	
 	public static void paintMap(Graphics g) {
+		addToTileList();
+		for(Tile t: tiles) {
+			t.place(g);
+		}
+	}
+	
+	public static void addToTileList() {
 		int y = 0;
 		for(String s: mapLines) {
 			for(int i = 0; i < s.length(); i++) {
 				if(s.charAt(i) == '0') {
-					g.setColor(Color.BLACK);
-					g.fillRect(i * 32, y * 32, 32, 32);
+					tiles.add(new Tile(i,y,false));
 				}else {
-					g.setColor(Color.WHITE);
-					g.fillRect(i * 32, y * 32, 32, 32);
+					tiles.add(new Tile(i,y,true));
 				}
 			}
 			y++;
