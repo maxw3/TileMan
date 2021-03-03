@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.geom.*;
 import java.awt.Toolkit;
@@ -29,6 +30,8 @@ public class PlayField extends JPanel implements ActionListener {
 	
 	Enemy enemy = new Enemy();
 	Player player = new Player();
+	
+	private final int SCALE = Main.SCALE;
 
 	public Random random = new Random();
 	
@@ -59,10 +62,23 @@ public class PlayField extends JPanel implements ActionListener {
 		
 		g.setColor(Color.WHITE);
         
-        g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
+        //g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
         
-        g.drawImage(player.getCurrImage(),player.x,player.y,this); 
+        g.drawImage(player.getCurrImage(),player.getX(),player.getY(),this); 
     }
+	
+	public boolean checkLeft(){
+//		Point pPoint = new Point(player.getX() + SCALE,player.getY());
+//		Point tPoint = pPoint;
+//		tPoint.move(tPoint.x - SCALE, tPoint.y); 
+//		
+//		for(Tile t: MapGen.tiles) {
+//			if(t.getY() == tPoint.y && t.getX() == tPoint.x) {
+//			}
+//		}
+		
+		return true;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -76,20 +92,20 @@ public class PlayField extends JPanel implements ActionListener {
 
             int key = keyEvent.getKeyCode();
 
-            if (key == KeyEvent.VK_LEFT) {
-                player.left();
+            if (key == KeyEvent.VK_LEFT && checkLeft()) {
+            	player.left();
             }
 
             if (key == KeyEvent.VK_RIGHT) {
-                player.right();
+            	player.right();
             }
 
             if (key == KeyEvent.VK_UP) {
-                player.up();
+            	player.up();
             }
 
             if (key == KeyEvent.VK_DOWN) {
-                player.down();
+            	player.down();
             }
         }
     }

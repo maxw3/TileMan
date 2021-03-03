@@ -4,22 +4,30 @@ import java.awt.Point;
 
 public class Tile {
 	
-	boolean isFloor = true;
-	int x,y;
+	boolean isWall;
+	private int x,y;
+	private final int SCALE = Main.SCALE;
 	
 	Tile(int x, int y, boolean isFloor){
 		this.x = x;
 		this.y = y;
-		this.isFloor = isFloor;
+		this.isWall = isFloor;
 	}
 	
 	void place(Graphics g){
-		if(isFloor) {
-			g.setColor(Color.WHITE);
-			g.fillRect(x * 32, y * 32, 32, 32);
-		}else {
+		if(isWall) {
 			g.setColor(Color.BLACK);
-			g.fillRect(x * 32, y * 32, 32, 32);
+			g.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+		}else {
+			g.setColor(Color.WHITE);
+			g.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
 		}
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 }

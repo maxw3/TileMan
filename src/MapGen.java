@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapGen {
-	
-	private static final int MAP_SIZE_X = 5;
-	private static final int MAP_SIZE_Y = 5;
-	
 	private static File mapFile = new File("map.txt");
 	private static Scanner mapScan;
 	
@@ -18,7 +14,6 @@ public class MapGen {
 	
 	public static void init() throws FileNotFoundException {
 		scanMap();
-		testPrint();
 	}
 	
 	public static void paintMap(Graphics g) {
@@ -33,9 +28,9 @@ public class MapGen {
 		for(String s: mapLines) {
 			for(int i = 0; i < s.length(); i++) {
 				if(s.charAt(i) == '0') {
-					tiles.add(new Tile(i,y,false));
-				}else {
 					tiles.add(new Tile(i,y,true));
+				}else {
+					tiles.add(new Tile(i,y,false));
 				}
 			}
 			y++;

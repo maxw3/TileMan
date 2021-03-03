@@ -16,6 +16,7 @@ Walker: Art
 
 public class Main {
 	
+	public final static int SCALE = 32;
 	static MainFrame myMainFrame;
 	
 	public static void main(String[] args) throws FileNotFoundException {

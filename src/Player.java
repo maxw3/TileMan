@@ -1,12 +1,23 @@
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
 public class Player {
 	
-	int x,y;
+	private int x = 32, y = 32;
 	
+	private final int SCALE = Main.SCALE;
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	private Image imagePlayerDown;
     private Image imagePlayerRight;
     private Image imagePlayerLeft;
@@ -41,22 +52,24 @@ public class Player {
     }
     
 	public void up(){
-		y -= 32;
 		setCurrImage(imagePlayerUp);
+		y -= 32;
 	}
 	
 	public void down() {
-		y += 32;
 		setCurrImage(imagePlayerDown);
+		y += 32;
 	}
 	
 	public void left() {
-		x -= 32;
+		//System.out.println(x);
 		setCurrImage(imagePlayerLeft);
+		x -= 32;
+		//System.out.println(x);
 	}
 	
 	public void right() {
-		x += 32;
 		setCurrImage(imagePlayerRight);
+		x += 32;
 	}
 }

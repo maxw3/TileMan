@@ -20,7 +20,7 @@ public class MainFrame extends JFrame implements ActionListener, EventListener{
 	}
 
 	public void initUI() {
-		this.setTitle("TileMan by TileMans Studios Inc.");
+		this.setTitle("TileMan by Måns Studios");
 		this.setResizable(false);
 		this.setSize(1000, 1028);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
