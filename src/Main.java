@@ -1,6 +1,9 @@
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -13,10 +16,12 @@ Walker: Art
 
 public class Main {
 	
+	public final static int SCALE = 32;
 	static MainFrame myMainFrame;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		myMainFrame = new MainFrame();
+		MapGen.init();
 	}
 }
 

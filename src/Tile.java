@@ -1,23 +1,33 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
 public class Tile {
 	
-	boolean isFloor = true;
-	int x,y;
-	Point pos;
+	boolean isWall;
+	private int x,y;
+	private final int SCALE = Main.SCALE;
 	
-	Tile(int x, int y){
-		this.x = x;
-		this.y = y;
-		pos = new Point(this.x,this.y);
+	Tile(int x, int y, boolean isFloor){
+		this.x = x * SCALE;
+		this.y = y * SCALE;
+		this.isWall = isFloor;
 	}
 	
 	void place(Graphics g){
-		g.fillRect(x, y, 32, 32);
+		if(isWall) {
+			g.setColor(Color.BLACK);
+			g.fillRect(x, y, SCALE, SCALE);
+		}else {
+			g.setColor(Color.WHITE);
+			g.fillRect(x, y, SCALE, SCALE);
+		}
 	}
 	
-	public Point getPos() {
-		return pos;
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 }

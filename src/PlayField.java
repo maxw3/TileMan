@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.geom.*;
 import java.awt.Toolkit;
@@ -27,147 +28,150 @@ import javax.swing.*;
 public class PlayField extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
-	private int x, y;
-	
 	Enemy enemy = new Enemy();
+	Player player = new Player();
+	
+	private final int SCALE = Main.SCALE;
 
 	public Random random = new Random();
 	
 	private Timer timer;
-	
-	private Image imagePlayerDown;
-    private Image imagePlayerRight;
-    private Image imagePlayerLeft;
-    private Image imagePlayerUp;
-    private Image currentImage; 
-    
-    public ArrayList<Tile> tiles = new ArrayList<Tile>();
 
 	public PlayField() {
-		initializeBoard();
+		initBoard();
 	}
 	
 	//k
-	public void initializeBoard() {
+	public void initBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
         
         this.setBackground(new Color(69,69,180));
-        
-        images();
-        
-        for(int i = 0; i < 1000; i++) {
-        	for(int j = 0; j < 1000; j++) {
-        		tiles.add(new Tile(i,j));
-        		j += 32;
-        	}
-        	i += 32;
-        }
-        
-        initializeGame();
+
+        initGame();
 	}
 	
-	private void images() {
-        ImageIcon player1DownImage = new ImageIcon("player1down.png");
-        imagePlayerDown = player1DownImage.getImage();
-        currentImage = imagePlayerDown;
-
-        ImageIcon player1RightImage = new ImageIcon("player1right.png");
-        imagePlayerRight = player1RightImage.getImage();
-
-        ImageIcon Player1UpImage = new ImageIcon("player1up.png");
-        imagePlayerUp = Player1UpImage.getImage();
-
-        ImageIcon Player1LeftImage = new ImageIcon("player1left.png");
-        imagePlayerLeft = Player1LeftImage.getImage();
-        
-//        ImageIcon spritesIcon = new ImageIcon("charSpriteSheet.png");
-//        spriteSheet = spritesIcon.getImage();
-    }
-	
-	private void initializeGame() {
-		
+	private void initGame() {
         timer = new Timer(100, this);
         timer.start();
     }
 	
-//	public void rand(Graphics g) {
-//		for(int i = 0; i < 1000; i += 25) {
-//	        for(int j = 0; j < 1000; j += 25){
-//	        	boolean randBool = random.nextBoolean();
-//	        	Color col;
-//	        	if(randBool) {
-//	        		col = Color.white;
-//	        	}else {
-//	        		col = Color.black;
-//	        	}
-//	            g.setColor(col);
-//	            g.fillRect(j, i, 25, 25);
-//	        }
-//	    }
-//	}
-	
 	@Override
     public void paintComponent(Graphics g) {
-		
-		for(Tile t: tiles) {
-			t.place(g);
-		}
+		MapGen.paintMap(g);
 		
 		g.setColor(Color.WHITE);
         
-        g.drawImage(enemy.getCurrImage(), enemy.enemyx, enemy.enemyy, this);
+        g.drawImage(enemy.getCurrImage(), enemy.enemyX, enemy.enemyY, this);
         
-        g.drawImage(currentImage,x,y,this); 
+        g.drawImage(player.getCurrImage(),player.getX(),player.getY(),this); 
     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 	}
-
-	public void up(){
-		y -= 32;
+	
+	public boolean checkLeft() {
+		
+		int goToX = player.getX() - SCALE;
+		int goToY = player.getY();
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 	
-	public void down() {
-		y += 32;
+	public boolean checkRight() {
+		
+		int goToX = player.getX() + SCALE;
+		int goToY = player.getY();
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 	
-	public void left() {
-		x -= 32;
+	public boolean checkUp() {
+		
+		int goToX = player.getX();
+		int goToY = player.getY() - SCALE;
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 	
-	public void right() {
-		x += 32;
+	public boolean checkDown() {
+		
+		int goToX = player.getX();
+		int goToY = player.getY() + SCALE;
+		
+		for(Tile t: MapGen.tiles) {
+			if(t.getX() == goToX) {
+				if(t.getY() == goToY) {
+					if(t.isWall) {
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	private class TAdapter extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
+        	
+        	System.out.print("From:(" + player.getX() + "," + player.getY() + ")");
 
             int key = keyEvent.getKeyCode();
 
-            if (key == KeyEvent.VK_LEFT) {
-                left();
-                currentImage = imagePlayerLeft; //change I made 
+            if (key == KeyEvent.VK_LEFT && checkLeft()) {
+            	player.left();
             }
 
-            if (key == KeyEvent.VK_RIGHT) {
-                right();
-                currentImage = imagePlayerRight;//change I made 
+            if (key == KeyEvent.VK_RIGHT && checkRight()) {
+            	player.right();
             }
 
-            if (key == KeyEvent.VK_UP) {
-                up();
-                currentImage = imagePlayerUp;//change I made 
+            if (key == KeyEvent.VK_UP && checkUp()) {
+            	player.up();
             }
 
-            if (key == KeyEvent.VK_DOWN) {
-                down();
-                currentImage = imagePlayerDown;//change I made 
+            if (key == KeyEvent.VK_DOWN && checkDown()) {
+            	player.down();
             }
+            
+            System.out.print(" To:(" + player.getX() + "," + player.getY() + ")");
+            System.out.println();
+            
         }
     }
 	
